@@ -5,21 +5,30 @@ import { findAllByTitle } from '@testing-library/react';
  export default class Post extends React.Component{
     constructor(props) {
         super(props);
-
+        
         this.state = {
             comments: [],
             newCommentText: ''
         };
-
+        
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+    };
+
+    newCommentValue(e){
+        if (this.state.newCommentText === "" ){
+            return <div class="alert">Poxa, é mais legal quando você digita alguma coisa! :(</div>;     
+        }
+        else{
+            return this.state.newCommentText;
+        }
     }
 
     handleSubmit(e){
         this.setState({
             comments: [
                 ...this.state.comments,
-                { text: this.state.newCommentText }
+                { text: this.newCommentValue() }
             ]
         });
 
